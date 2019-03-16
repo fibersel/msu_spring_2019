@@ -25,8 +25,8 @@ size_t count_prime(bool * prime, size_t size, size_t leftIndex, size_t rightInde
 	if(leftIndex > size || rightIndex > size)
 		throw std::out_of_range("Any index is out of range!");
 	for(size_t i = leftIndex; i <= rightIndex;i++)
-			if(prime[Data[i]])
-				ctr++;	
+		if(prime[Data[i]])
+			ctr++;	
 	return ctr;
 	}
 
@@ -43,7 +43,6 @@ int main(int argc, char* argv[]){
 	{
 		leftBound = std::atoi(argv[i]);
 		rightBound = std::atoi(argv[i + 1]);
-		
 		
 		size_t leftIndex = 0, rightIndex = Size - 1;
 		while(Data[leftIndex] < leftBound)

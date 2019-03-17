@@ -3,7 +3,7 @@ CC=g++
 
 
 #Установим используемые флаги
-CFLAGS=-c -Wall -O2
+CFLAGS=-c -Wall -std=c++11
 
 SOURCES=main.cpp
 OBJECTS=$(SOURCES:.cpp=.o)

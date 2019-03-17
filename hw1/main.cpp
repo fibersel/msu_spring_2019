@@ -64,6 +64,7 @@ int main(int argc, char* argv[]){
 	catch(std::out_of_range& e)
 	{
 		std::cout <<"any bound is out of range!" << e.what();
+		delete [] prime;
 		return -1;
 	}
 		std::cout << counter << std::endl;

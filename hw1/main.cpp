@@ -7,7 +7,8 @@
 #define MAXVAL 100000
 
 
-void sieve_fill(bool * prime, size_t size){
+void sieve_fill(bool * prime, size_t size)
+{
 	for(size_t i = 2; i < size; i++)
 		prime[i] = true;
 	prime[1] = prime[0] = false;
@@ -15,11 +16,12 @@ void sieve_fill(bool * prime, size_t size){
 		if(prime[i])
 			if(i * i < size)
 				for(unsigned long long j = i * i; j < size; j += i)
-					prime[j] = false;
-	}
+					prime[j] = false;	
+}
 
 
-size_t count_prime(bool * prime, size_t size, size_t leftIndex, size_t rightIndex){
+size_t count_prime(bool * prime, size_t size, size_t leftIndex, size_t rightIndex)
+{
 	size_t ctr = 0;
 	if(leftIndex > size || rightIndex > size)
 		throw std::out_of_range("Any index is out of range!");
@@ -30,7 +32,8 @@ size_t count_prime(bool * prime, size_t size, size_t leftIndex, size_t rightInde
 }
 
 
-int main(int argc, char* argv[]){
+int main(int argc, char* argv[])
+{
 	if(argc == 1 || argc % 2 == 0)
 		return -1;
 

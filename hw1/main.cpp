@@ -26,7 +26,7 @@ size_t count_prime(bool * prime, size_t size, size_t leftIndex, size_t rightInde
 	for(size_t i = leftIndex; i <= rightIndex; i++)
 		if(prime[Data[i]])
 			ctr++;
-return ctr;
+	return ctr;
 }
 
 

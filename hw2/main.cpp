@@ -7,57 +7,57 @@ enum State
 };
 
 
-std::vector<Token> tokenize(std::string& query)
+const std::vector<Token> tokenize(std::string& query)
 {
-        std::vector<Token> container;
-        std::string buf = "";
-        State cs = Start;
+    std::vector<Token> container;
+    std::string buf = "";
+    State cs = Start;
 
-        for(char& c: query){
-            switch (cs)
-            {
-                case Start:
-                    if(c == '+' || c == '-' || c == '*' || c =='/')
+    for(char& c: query){
+        switch (cs)
+        {
+            case Start:
+                if(c == '+' || c == '-' || c == '*' || c =='/')
+                {
+                    container.push_back(Token(c));
+                    buf = "";
+                }
+                else if(isdigit(c))
+                {
+                    buf += c;
+                    cs = Num;
+                }
+                else if(c == ' '){
+                    break;    
+                }
+                else
+                {
+                    throw std::invalid_argument("symbol is not allowed!");
+                }
+                break;
+            case Num:
+                if(c == '+' || c == '-' || c == '*' || c =='/' || c == ' ')
+                {
+                    container.push_back(Token(buf));
+                    if(c != ' ')
                     {
-                        container.push_back(c);
-                        buf = "";
+                        container.push_back(Token(c));
                     }
-                    else if(isdigit(c))
-                    {
-                        buf += c;
-                        cs = Num;
-                    }
-                    else if(c == ' '){
-                        break;    
-                    }
-                    else
-                    {
-                        throw std::invalid_argument("symbol is not allowed!");
-                    }
-                    break;
-                case Num:
-                    if(c == '+' || c == '-' || c == '*' || c =='/' || c == ' ')
-                    {
-                        container.push_back(Token(buf));
-                        if(c != ' ')
-                        {
-                            container.push_back(Token(c));
-                        }
-                        buf = "";
-                        cs = Start;    
-                    } else if(isdigit(c))
-                    {
-                        buf += c;    
-                    } else 
-                    {
-                        throw std::invalid_argument("symbol is not allowed!");
-                    }
-                    break;
-            }
+                    buf = "";
+                    cs = Start;    
+                } else if(isdigit(c))
+                {
+                    buf += c;    
+                } else 
+                {
+                    throw std::invalid_argument("symbol is not allowed!");
+                }
+                break;
         }
-        if(buf != "")
-            container.push_back(Token(buf));
-        return container;
+    }
+    if(buf != "")
+        container.push_back(Token(buf));
+    return container;
 }
 
 
@@ -73,7 +73,7 @@ int main(int argc, char* argv[])
     
     try
     {
-        std::vector<Token> ctr = tokenize(query);
+        const std::vector<Token> ctr = tokenize(query);
         Calc calc(ctr);
         std::cout << calc.evaluate() << std::endl;
     }

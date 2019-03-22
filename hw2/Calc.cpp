@@ -1,7 +1,7 @@
 #include "Calc.h"
 #include "Token.h"
 
-Calc::Calc(std::vector<Token>& arr): arr(arr)
+Calc::Calc(const std::vector<Token>& arr): arr(arr)
 {
     iter = arr.begin();
 };

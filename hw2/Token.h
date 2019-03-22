@@ -27,6 +27,6 @@ public:
     Token(char& raw);
 
 
-    Token(std::string raw);
+    Token(std::string& raw);
 };
 

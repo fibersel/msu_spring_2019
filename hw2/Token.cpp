@@ -27,7 +27,7 @@ Token::Token(char& raw)
 
 
 
-Token::Token(std::string s)
+Token::Token(std::string& s)
 {
     val = stoi(s);
     type = number;

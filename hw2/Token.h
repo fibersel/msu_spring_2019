@@ -24,9 +24,7 @@ public:
     token_type type;
     action_type action;
 
-    Token(char& raw);
-
-
-    Token(std::string& raw);
+    Token(const char& raw);
+    Token(const std::string& raw);
 };
 

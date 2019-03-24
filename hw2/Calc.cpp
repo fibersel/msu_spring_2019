@@ -15,14 +15,14 @@ int64_t Calc::pop()
 }
 
 
-void Calc::E()
+void Calc::parse_sum()
 {
-    T();
+    parse_mul();
     while(iter->type == oper && (iter->action == plus || iter->action == minus))
     {
         action_type act = iter->action;
         shift_ptr();
-        T();
+        parse_mul();
         int64_t o2 = pop();
         int64_t o1 = pop();
         if(act == minus)
@@ -43,19 +43,19 @@ void Calc::shift_ptr()
 
 int64_t Calc::evaluate()
 {
-    E();
+    parse_sum();
     return pop();
 };
 
 
-void Calc::T()
+void Calc::parse_mul()
 {
-    S();
+    parse_ident();
     while(iter->type == oper && (iter->action == mul || iter->action == division))
     {
         action_type act = iter->action;
         shift_ptr();
-        S();
+        parse_ident();
         int64_t o2 = pop();
         int64_t o1 = pop();
         if(act == mul)
@@ -70,7 +70,7 @@ void Calc::T()
 };
 
    
-void Calc::S()
+void Calc::parse_ident()
 {
     int64_t modifier = 1;
     if(iter->type == oper && iter->action == minus)

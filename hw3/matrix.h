@@ -25,7 +25,7 @@ private:
 public:
     Matrix(int rows, int cols);
     Row& operator[](int n) const;
-    void operator*=(int n) const;
+    void operator*=(int n);
     bool operator==(const Matrix& matr) const;
     bool operator!=(const Matrix& matr) const;
     int getRows() const;

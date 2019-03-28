@@ -71,7 +71,7 @@ bool Matrix::operator!=(const Matrix& matr) const  {
     return true;
 };
 
-void Matrix::operator*=(int n) const {
+void Matrix::operator*=(int n)  {
     for(int i = 0; i < rows_n; i++)
         *arr[i] *= n;
 };

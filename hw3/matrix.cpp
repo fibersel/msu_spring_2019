@@ -14,7 +14,13 @@ Row::~Row() {
     delete arr;
 }
 
-int& Row::operator[](int n) const {
+int& Row::operator[](int n) {
+    if(n >= len)
+        throw std::out_of_range("");
+    return arr[n];
+};
+
+const int& Row::operator[](int n) const {
     if(n >= len)
         throw std::out_of_range("");
     return arr[n];
@@ -50,12 +56,17 @@ Matrix::Matrix(int rows, int cols) {
 };
 
 
-Row& Matrix::operator[](int n) const {
+Row& Matrix::operator[](int n) {
     if(n >= rows_n)
         throw std::out_of_range("");
     return *arr[n];
 };
 
+const Row& Matrix::operator[](int n) const {
+    if(n >= rows_n)
+        throw std::out_of_range("");
+    return *arr[n];
+};
 
 bool Matrix::operator==(const Matrix& matr) const {
     for(int i = 0; i < rows_n; i++)

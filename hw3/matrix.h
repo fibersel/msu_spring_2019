@@ -9,7 +9,7 @@ public:
     Row(int len);
     const int& operator[](int n) const;
     int& operator[](int n);
-    void operator*=(int n) const;
+    void operator*=(int n);
     bool operator==(const Row& row) const;
     bool operator!=(const Row& row) const;
     ~Row();
@@ -27,7 +27,7 @@ public:
     Matrix(int rows, int cols);
     const Row& operator[](int n) const;
     Row& operator[](int n);
-    void operator*=(int n);
+    Matrix& operator*=(int n);
     bool operator==(const Matrix& matr) const;
     bool operator!=(const Matrix& matr) const;
     int getRows() const;

@@ -26,7 +26,7 @@ const int& Row::operator[](int n) const {
     return arr[n];
 };
 
-void Row::operator*=(int n) const {
+void Row::operator*=(int n)  {
     for(int i = 0; i < len; i++)
         arr[i] *= n;
 };
@@ -82,9 +82,10 @@ bool Matrix::operator!=(const Matrix& matr) const  {
     return true;
 };
 
-void Matrix::operator*=(int n)  {
+Matrix& Matrix::operator*=(int n)  {
     for(int i = 0; i < rows_n; i++)
         *arr[i] *= n;
+    return *this;
 };
 
 

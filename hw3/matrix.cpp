@@ -11,7 +11,7 @@ Row::Row(int num) {
 
 
 Row::~Row() {
-    delete arr;
+    delete[] arr;
 }
 
 int& Row::operator[](int n) {
@@ -100,5 +100,7 @@ int Matrix::getColumns() const {
 
 
 Matrix::~Matrix() {
+    for(int i = 0; i < rows_n; i++)
+        delete arr[i];
     delete[] arr;
 };

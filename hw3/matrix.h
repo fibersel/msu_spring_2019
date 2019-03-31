@@ -5,6 +5,7 @@ class Row {
 private:
     int* arr;
     int len;
+    bool make_comparison_(const Row& row) const;
 public:
     Row(int len);
     const int& operator[](int n) const;
@@ -23,6 +24,7 @@ private:
     int rows_n;
     int cols_n;
     Row** arr;
+    bool make_comparison_(const Matrix& matr) const;
 public:
     Matrix(int rows, int cols);
     const Row& operator[](int n) const;

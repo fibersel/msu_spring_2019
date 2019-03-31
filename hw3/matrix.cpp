@@ -33,15 +33,16 @@ void Row::operator*=(int n)  {
 
 
 bool Row::operator==(const Row& row) const {
-    for(int i = 0; i < len; i++)
-        if(arr[i] != row.arr[i])
-            return false;
-    return true;
+    return make_comparison_(row);
 };
 
 bool Row::operator!=(const Row& row) const {
+    return !make_comparison_(row);
+};
+
+bool Row::make_comparison_(const Row& row) const {
     for(int i = 0; i < len; i++)
-        if(arr[i] == row.arr[i])
+        if(arr[i] != row.arr[i])
             return false;
     return true;
 };
@@ -69,15 +70,16 @@ const Row& Matrix::operator[](int n) const {
 };
 
 bool Matrix::operator==(const Matrix& matr) const {
-    for(int i = 0; i < rows_n; i++)
-        if(arr[i] != matr.arr[i])
-            return false;
-    return true;
+    return make_comparison_(matr);
 };
 
 bool Matrix::operator!=(const Matrix& matr) const  {
+    return !make_comparison_(matr);
+};
+
+bool Matrix::make_comparison_(const Matrix& matr) const {
     for(int i = 0; i < rows_n; i++)
-        if(arr[i] == matr.arr[i])
+        if((arr[i] != matr.arr[i]))
             return false;
     return true;
 };

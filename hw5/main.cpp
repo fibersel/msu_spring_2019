@@ -2,7 +2,7 @@
 #include <iostream>
 #include <atomic>
 
-#define MAX_PASS 500000
+const int  MAX_PASS  = 500000;
 
 void ping(std::atomic<int>& flag) {
     int ctr = 0;

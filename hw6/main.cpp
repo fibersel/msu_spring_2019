@@ -15,8 +15,9 @@ public:
     std::mutex mutex;
     size_t size;
     bool end;
+    bool ready;
     
-    data_accessor(int batch_size):buf(new uint64_t[batch_size]), end(false){};
+    data_accessor(int batch_size):buf(new uint64_t[batch_size]), end(false), ready(false){};
 };
 
 
@@ -73,7 +74,12 @@ void sorter(const std::string& name, data_accessor* access, int id){
     while(true){
         {
             std::unique_lock<std::mutex> lock(access->mutex);
-            vars[id].wait(lock);
+            vars[id].wait(lock, 
+            [access]()
+            {
+                return access->ready;
+            });
+            access->ready = false;
             if(access->end)
                 break;
             size = access->size;
@@ -111,8 +117,9 @@ int main(int argc, char * argv[]){
             std::lock_guard<std::mutex> lock(accessor_1->mutex);
             f.seekg(batch_num++ * sizeof(uint64_t) * batch_size);
             f.read((char*) accessor_1->buf, sizeof(uint64_t) * batch_size);
-            count_1 = f.gcount();
+            count_1 = f.gcount() / sizeof(uint64_t);
             accessor_1->size = count_1;
+            accessor_1->ready = true;
             if(count_1 == 0)
                 accessor_1->end = true;
         }
@@ -121,7 +128,9 @@ int main(int argc, char * argv[]){
             std::lock_guard<std::mutex> lock(accessor_2->mutex);
             f.seekg(batch_num++ * sizeof(uint64_t) * batch_size);
             f.read((char*) accessor_2->buf, sizeof(uint64_t) * batch_size);
-            count_2 = f.gcount();
+            count_2 = f.gcount() / sizeof(uint64_t);
+            accessor_2->size = count_2;
+            accessor_2->ready = true;
             if(count_2 == 0)
                 accessor_2->end = true;
         }
